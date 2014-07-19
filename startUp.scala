@@ -17,6 +17,8 @@ object startUp {
     }).count()
     println(sum)
   }
+  
+  
   def main(args: Array[String]) {
     val logFile = "/home/junius/develop/spark-1.0.0/my_spark/pracData/number.txt" // Should be some file on your system
     val sc = new SparkContext("local[4]", "Simple App")
