@@ -1,5 +1,6 @@
-//package org.apache.spark.my_spark package name for deployment.
-package main.scala.org.apache.spark.my_spark
+// bin/run-example org.apache.spark.examples.mySparkExamples.startUp
+
+package org.apache.spark.examples.mySparkExamples
 
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkContext._

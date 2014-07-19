@@ -1,4 +1,4 @@
-package org.apache.spark.my_spark
+package org.apache.spark.examples.mySparkExamples
 
 
 import org.apache.spark.streaming._
