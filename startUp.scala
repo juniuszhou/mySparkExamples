@@ -20,11 +20,11 @@ object startUp {
   
   
   def main(args: Array[String]) {
-    val logFile = "/home/junius/develop/spark-1.0.0/my_spark/pracData/number.txt" // Should be some file on your system
+    val logFile = "/home/junius/git_hub/spark/examples/src/main/resources/number.txt" // Should be some file on your system
     val sc = new SparkContext("local[4]", "Simple App")
     val logData : RDD[String] = sc.textFile(logFile, 2).cache()
-    val logFile2 = "/home/junius/develop/spark-1.0.0/my_spark/pracData/number.txt" // Should be some file on your system
-    val log2Data : RDD[String] = sc.textFile(logFile2, 2).cache()
+
+    val log2Data : RDD[String] = sc.textFile(logFile, 2).cache()
     //get a Cartesian RDD
     val cartesianData = logData.cartesian(log2Data)
     //cartesianData.filter(line => {println(line); true}).count

@@ -1,3 +1,5 @@
+// bin/run-example org.apache.spark.examples.mySparkExamples.simpleSql
+
 package org.apache.spark.examples.mySparkExamples
 
 import org.apache.spark.SparkContext
@@ -15,20 +17,27 @@ object simpleSql {
   def main(args: Array[String]) {
     val sc = new SparkContext("local", "Simple App")
     val sqlContext = new SQLContext(sc)
-    val people = sc.textFile("/home/junius/develop/spark-1.0.0/examples/src/main/resources/people.txt", 4).map(_.split(",")).map(p => Person(p(0), p(1).trim.toInt))
-    //val other: SchemaRDD = new SchemaRDD(people)
-    val other = new SchemaRDD(sqlContext, null)
+
+    val people = sc.textFile("/home/junius/git_hub/spark/examples/src/main/resources/people.txt", 4).map(_.split(",")).map(p => Person(p(0), p(1).trim.toInt))
+    val other: SchemaRDD = sqlContext.createSchemaRDD(people)
+    //val other = new SchemaRDD(sqlContext, null)
     other.registerAsTable("people")
     
-    //people.registerAsTable("people")
-    val out = people.map(p => println(p.name + " " + p.age))
-    out.count 
     
-    val rdd = sc.parallelize((1 to 100).map(i => Record(i, s"val_$i")))
-    // Any RDD containing case classes can be registered as a table.  The schema of the table is
-    // automatically inferred using scala reflection.
-    rdd.registerAsTable("records")
+    /*(0 to 10).map( age => {
+      sqlContext.sql("INSERT INTO people (name,age) VALUES(" + age.toString + age + ")" )
+    })
+    */
     
+    //val teenagers = sqlContext.sql("SELECT name, age FROM people WHERE age > 10")
+    val teenagers = sqlContext.sql("SET name = junius WHERE age > 29")
+    print(teenagers.count)
+    
+    val tt = sqlContext.sql("SELECT name, age FROM people WHERE age > 10")
+    tt.map(t => {print(t(0).toString + " " + t(1))}).count
+    //teenagers.saveAsTextFile("/home/junius/git_hub/spark/examples/src/main/resources/people.txt")
+    
+   
     //people.registerAsTable("people")
   }
 }
