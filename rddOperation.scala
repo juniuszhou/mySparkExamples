@@ -33,6 +33,7 @@ object rddOperation{
     val valcounts = logData.flatMap(line => line.split(" ")).map(word => (word, 1)).reduceByKey(_ + _, 2)
   }
   
+<<<<<<< HEAD
   def partitionSum(sc: SparkContext){
     val logFile = "/home/junius/git_hub/spark/examples/src/main/resources/number.txt"
     val logData = sc.textFile(logFile, 4).cache
@@ -91,6 +92,12 @@ object rddOperation{
 	val logFile = "/home/junius/git_hub/spark/examples/src/main/resources/number.txt" // Should be some file on your system
     val sc = new SparkContext("local[4]", "Simple App")
 	pairRddReduce(sc)
+=======
+  def main(args: Array[String]) {
+	val logFile = "/home/junius/git_hub/spark/examples/src/main/resources/number.txt" // Should be some file on your system
+    val sc = new SparkContext("local[4]", "Simple App")
+	readTextFile(sc)
+>>>>>>> 94143c94933d817c905f9e5d8afe52c55733fb7a
 	
 	val logData = readNumbers(sc)
     //join
@@ -99,6 +106,11 @@ object rddOperation{
     //kvRDD2.map(print).count
     
     sc.stop
+<<<<<<< HEAD
 
+=======
+    
+    
+>>>>>>> 94143c94933d817c905f9e5d8afe52c55733fb7a
   }
 }
